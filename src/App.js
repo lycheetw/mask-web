@@ -38,7 +38,7 @@ export default class App extends React.Component {
     }, 60 * 1000);
 
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(position => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.mapRef.leafletElement.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
       }, err => {});
     }
