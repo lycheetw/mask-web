@@ -110,8 +110,8 @@ export default class App extends React.Component {
         }
         >
         <TileLayer
-          attribution='&copy; <a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'
-          url='https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png'
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
         {markers}
       </Map>
