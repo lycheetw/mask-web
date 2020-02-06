@@ -1,0 +1,100 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+}
+
+#map-continer {
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+#list-continer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow:auto;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+#list-continer > * {
+  display: inline-block;
+}
+
+.custom-icon {
+  opacity: 1;
+  > i {
+    font-size: 30px;
+  }
+}
+
+.custom-icon.focused {
+  opacity: 1;
+  z-index: 9999 !important ;
+  > i {
+    font-size: 50px;
+  }
+  color:rgb(0, 172, 0);
+}
+
+.custom-icon.green {
+  color:rgb(0, 172, 0);
+}
+
+.custom-icon.red {
+  color: red
+}
+
+.custom-icon.orange {
+  color: orange
+}
+
+.custom-icon.gray {
+  color: gray;
+  opacity: 0.5;
+}
+
+.no-decoration{
+  text-decoration: none;
+}
