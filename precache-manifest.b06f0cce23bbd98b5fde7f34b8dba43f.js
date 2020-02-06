@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5fcec34016979e40059ec3eab00d90a6",
+    "revision": "b38ca3b2c5ff72061189626800a7affe",
     "url": "/mask-web/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mask-web/static/css/2.0f3cd8ae.chunk.css"
   },
   {
-    "revision": "7797b11fe57cf2d07385",
+    "revision": "cd1a2c0bf390a5a299c0",
     "url": "/mask-web/static/css/main.92c15a76.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mask-web/static/js/2.c9aad864.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7797b11fe57cf2d07385",
-    "url": "/mask-web/static/js/main.e476d4f1.chunk.js"
+    "revision": "cd1a2c0bf390a5a299c0",
+    "url": "/mask-web/static/js/main.8f753d43.chunk.js"
   },
   {
     "revision": "c18ce182398e2282ba08",
