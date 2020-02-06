@@ -2,7 +2,7 @@
   "name": "mask-web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lycheetw.github.io/mask-web",
+  "homepage": "https://maskmap.lychee.page/",
   "dependencies": {
     "@material/card": "^4.0.0",
     "@material/react-card": "^0.15.0",
