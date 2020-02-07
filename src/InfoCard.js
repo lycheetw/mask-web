@@ -19,10 +19,11 @@ import MaterialIcon from '@material/react-material-icon';
 export default class InfoCard extends React.Component {
   render() {
     // const mapLink = `http://maps.apple.com/?q=${this.props.detail.name}&sll=${this.props.detail.position[0]},${this.props.detail.position[1]}&z=12`;
-    const mapLink = `http://maps.google.com/?q=${this.props.detail.name}&sll=${this.props.detail.position[0]},${this.props.detail.position[1]}&z=12`;
+    const mapLink = `http://maps.google.com/?q=${this.props.detail.name}-${this.props.detail.addr}`;
     const phone = `tel:${this.props.detail.phone}`;
+    const focused = this.props.detail.id === this.props.focusId ? "focused" : "";
     return (
-      <Card className='mdc-card demo-card info-card' onClick={() => {}}>
+      <Card className={`mdc-card demo-card info-card ${focused}`} onClick={e => {this.props.onClick(e)}}>
         <CardPrimaryContent className='demo-card__primary-action'>
         <div className="card__primary">
           <h2>{this.props.detail.name}</h2>
@@ -40,12 +41,14 @@ export default class InfoCard extends React.Component {
             </a>
           </CardActionButtons>
           <CardActionIcons>
-            <a href={phone} className="no-decoration">
+            {/* <a href={phone} className="no-decoration">
             <IconButton>
               <MaterialIcon icon='call' />
             </IconButton>
-            </a>
+            </a> */}
+            <div>{this.props.detail.timestamp}</div>
           </CardActionIcons>
+          
         </CardActions>
       </Card>
 

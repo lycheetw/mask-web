@@ -80,12 +80,31 @@ export default class App extends React.Component {
     const markers = this.state.maskData.map(it => {
       return <Marker key={it.id} id={it.id} position={it.position} focusId={this.state.focusId} num={it.adult}
         onClick={(e) => {
+          
+          
+          const idx1 = this.state.maskData.findIndex(it2 => it.id === it2.id);
+          const idx2 = this.state.maskData.findIndex(it2 => this.state.focusId === it2.id);
+
+          const isMobile = window.innerWidth < 480;
+          if(isMobile) {
+            const width = this.cardListRef.offsetWidth;
+            if(Math.abs(idx1 - idx2) > 5) {
+              this.cardListRef.scrollTo({'behavior': 'auto', 'left': width * idx1});
+            } else {
+              this.cardListRef.scrollTo({'behavior': 'smooth', 'left': width * idx1});
+            }
+          } else {
+            const height = this.cardListRef.childNodes[0].offsetHeight + 10;
+            if(Math.abs(idx1 - idx2) > 5) {
+              this.cardListRef.scrollTo({'behavior': 'auto', 'top': height * idx1});
+            } else {
+              this.cardListRef.scrollTo({'behavior': 'smooth', 'top': height * idx1});
+            }
+          }
+          
           this.setState({
             focusId: it.id
           });
-          const width = this.cardListRef.offsetWidth;
-          const idx = this.state.maskData.findIndex(it2 => it.id === it2.id);
-          this.cardListRef.scrollTo({'behavior': 'smooth', 'left': width * idx})
         }}
         />
     });
@@ -93,6 +112,18 @@ export default class App extends React.Component {
     const cards = this.state.maskData.map(it => {
       return <InfoCard key={it.id} 
         detail={it}
+        focusId={this.state.focusId}
+        onClick={e => {
+          const isMobile = window.innerWidth < 480;
+          if(!isMobile) {
+            const height = this.cardListRef.childNodes[0].offsetHeight + 10;
+            const idx = this.state.maskData.findIndex(it2 => it.id === it2.id);
+            this.cardListRef.scrollTo({'behavior': 'smooth', 'top': height * idx});
+            this.setState({
+            focusId: it.id
+          });
+          }
+        }}
       />
     });
 
@@ -102,7 +133,7 @@ export default class App extends React.Component {
         ref={(ref) => this.mapRef = ref}
         center={this.state.defaultCenter} 
         zoom={this.state.zoom}
-        minZoom={15}
+        minZoom={14}
         maxZoom={18}
         onMoveend={(it) =>  {
             this.drawMarkers();
@@ -116,7 +147,32 @@ export default class App extends React.Component {
         {markers}
       </Map>
       <div id="list-continer"
-        ref={(ref) => this.cardListRef = ref}>
+        ref={(ref) => this.cardListRef = ref}
+        onScroll={e => {
+          if(this.timeoutFun) {
+            clearTimeout(this.timeoutFun);
+          }
+          this.timeoutFun = setTimeout(() => {
+            const width = this.cardListRef.offsetWidth;
+            let idx;
+            const isMobile = window.innerWidth < 480;
+            if(isMobile) {
+              idx = Math.round(this.cardListRef.scrollLeft / width);
+              this.cardListRef.scrollTo({'behavior': 'smooth', 'left': width * idx});
+              this.setState({
+                focusId: this.state.maskData[idx].id
+              });
+            } else {
+              // const height = this.cardListRef.childNodes[0].offsetHeight + 10;
+              // idx = Math.round(this.cardListRef.scrollTop / height);
+              // this.cardListRef.scrollTo({'behavior': 'smooth', 'top': height * idx});
+              // this.setState({
+              //   focusId: this.state.maskData[idx].id
+              // });
+            }
+          }, 50);
+        }}
+        >
         {cards}
       </div>
 

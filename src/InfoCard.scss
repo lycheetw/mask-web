@@ -1,6 +1,17 @@
-.info-card {
-  width: calc(100vw - 20px);
-  margin: 10px 10px;
+@media (max-width: 480px) {
+  .info-card {
+    width: calc(100vw - 20px);
+    margin: 10px 10px;
+  }
+}
+@media (min-width: 481px) {
+  .info-card {
+    width: 360px;
+    margin: 10px 10px;
+  }
+  .info-card.focused {
+    background-color: rgb(238, 238, 238);
+  }
 }
 
 .card__primary {
@@ -17,10 +28,6 @@
 
 .card__secondary {
   padding: 1rem;
-}
-
-.mdc-icon-button--on {
-
 }
 
 .mdc-card__ripple{

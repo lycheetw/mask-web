@@ -48,19 +48,37 @@ html, body {
   z-index: 0;
 }
 
-#list-continer {
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  overflow:auto;
-  white-space: nowrap;
-  z-index: 1;
+@media (min-width: 320px) and (max-width: 480px) {
+  #list-continer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow:auto;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  #list-continer > * {
+    display: inline-block;
+  }
+}
+@media (min-width: 481px) {
+  #list-continer {
+    position: fixed;
+    bottom: 0px;
+    top: 0px;
+    right: 0px;
+    overflow: auto;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  #list-continer > * {
+    display: block;
+  }
 }
 
-#list-continer > * {
-  display: inline-block;
-}
+
+
 
 .custom-icon {
   opacity: 1;
@@ -92,7 +110,7 @@ html, body {
 
 .custom-icon.gray {
   color: gray;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .no-decoration{
