@@ -55,8 +55,33 @@ export default class App extends React.Component {
     const rightBottom = bounds.getSouthEast();
 
     const data = dataSet.filter(it => {
-      return it["latLng"][0] < leftTop.lat && it["latLng"][0] > rightBottom.lat
-          && it["latLng"][1] > leftTop.lng && it["latLng"][1] < rightBottom.lng
+      const isMobile = window.innerWidth < 480;
+      const _topBound = leftTop.lat;;
+      const _bottomBound = rightBottom.lat;
+      const _leftBound = leftTop.lng;
+      const _rightBound = rightBottom.lng;
+
+      let topBound, bottomBound, leftBound, rightBound;
+      
+      if(isMobile) {
+        const h = _topBound - _bottomBound;
+        topBound = _topBound - h * 0.05;
+        bottomBound = topBound - h * ((window.innerHeight - this.cardListRef.offsetHeight) / window.innerHeight) * 0.9;
+
+        const w = _rightBound - _leftBound;
+        leftBound = _leftBound + w * 0.05;
+        rightBound = _rightBound - w * 0.05;
+      } else {
+        const h = _topBound - _bottomBound;
+        topBound = _topBound - h * 0.05;
+        bottomBound = _bottomBound + h * 0.05;
+
+        const w = _rightBound - _leftBound;
+        leftBound = _leftBound + w * 0.05;
+        rightBound = _leftBound + w * ((window.innerWidth - this.cardListRef.offsetWidth) / window.innerWidth);
+      }
+      return it["latLng"][0] < topBound && it["latLng"][0] > bottomBound
+          && it["latLng"][1] > leftBound && it["latLng"][1] < rightBound
     }).filter(it => this.maskRawData[it.id])
     .map(it => {
       return {

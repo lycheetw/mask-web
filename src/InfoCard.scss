@@ -10,7 +10,17 @@
     margin: 10px 10px;
   }
   .info-card.focused {
-    background-color: rgb(238, 238, 238);
+    animation-name: hightlight;
+    animation-duration:1s;
+  }
+
+  @keyframes hightlight {
+    from {
+      background-color: rgba(241, 245, 22, 0.699);
+    }
+    to {
+      background-color: white;
+    }
   }
 }
 
