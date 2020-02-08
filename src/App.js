@@ -54,7 +54,14 @@ export default class App extends React.Component {
     const leftTop = bounds.getNorthWest();
     const rightBottom = bounds.getSouthEast();
 
+
     const data = dataSet.filter(it => {
+      //篩選可視範圍內的資料點，因為手機與桌機版型不同(資料卡清單擺放位置不同)，而分開處理。
+
+      if(this.mapRef.leafletElement.getZoom() < 14) {
+        return false;
+      }
+      
       const isMobile = window.innerWidth < 480;
       const _topBound = leftTop.lat;;
       const _bottomBound = rightBottom.lat;
@@ -104,13 +111,11 @@ export default class App extends React.Component {
   render() {
     const markers = this.state.maskData.map(it => {
       return <Marker key={it.id} id={it.id} position={it.position} focusId={this.state.focusId} num={it.adult}
-        onClick={(e) => {
-          
-          
+        onClick={e => {
           const idx1 = this.state.maskData.findIndex(it2 => it.id === it2.id);
           const idx2 = this.state.maskData.findIndex(it2 => this.state.focusId === it2.id);
-
           const isMobile = window.innerWidth < 480;
+
           if(isMobile) {
             const width = this.cardListRef.offsetWidth;
             if(Math.abs(idx1 - idx2) > 5) {
@@ -145,8 +150,8 @@ export default class App extends React.Component {
             const idx = this.state.maskData.findIndex(it2 => it.id === it2.id);
             this.cardListRef.scrollTo({'behavior': 'smooth', 'top': height * idx});
             this.setState({
-            focusId: it.id
-          });
+              focusId: it.id
+            });
           }
         }}
       />
@@ -158,9 +163,9 @@ export default class App extends React.Component {
         ref={(ref) => this.mapRef = ref}
         center={this.state.defaultCenter} 
         zoom={this.state.zoom}
-        minZoom={14}
-        maxZoom={18}
-        onMoveend={(it) =>  {
+        minZoom={8}
+        maxZoom={19}
+        onMoveend={e =>  {
             this.drawMarkers();
           }
         }
@@ -181,6 +186,7 @@ export default class App extends React.Component {
             const width = this.cardListRef.offsetWidth;
             let idx;
             const isMobile = window.innerWidth < 480;
+            // 手機版讓focus的資料卡保持在中央。
             if(isMobile) {
               idx = Math.round(this.cardListRef.scrollLeft / width);
               this.cardListRef.scrollTo({'behavior': 'smooth', 'left': width * idx});
@@ -188,12 +194,7 @@ export default class App extends React.Component {
                 focusId: this.state.maskData[idx].id
               });
             } else {
-              // const height = this.cardListRef.childNodes[0].offsetHeight + 10;
-              // idx = Math.round(this.cardListRef.scrollTop / height);
-              // this.cardListRef.scrollTo({'behavior': 'smooth', 'top': height * idx});
-              // this.setState({
-              //   focusId: this.state.maskData[idx].id
-              // });
+              
             }
           }, 50);
         }}
