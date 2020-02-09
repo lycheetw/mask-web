@@ -16,7 +16,7 @@ export default class Marker extends React.Component {
     const num = this.props.num || 0;
     let color;
     if(num > 50) color = "green";
-    else if(num > 30) color = "orange";
+    else if(num > 10) color = "orange";
     else if(num > 0) color = "red";
     else  color = "gray";
 
