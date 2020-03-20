@@ -28,8 +28,11 @@ export default class InfoCard extends React.Component {
         <div className="card__primary">
           <h2>{this.props.detail.name}</h2>
           <h3>{this.props.detail.addr}</h3>
-          <div style={{display: 'flex'}}><MaterialIcon icon='face' />： {this.props.detail.adult}</div>
-          <div style={{display: 'flex'}}><MaterialIcon icon='child_care'/>： {this.props.detail.child}</div>
+          <div className="note"><div>{this.props.detail.note}</div></div>
+          <div className="maskNum">
+            <span style={{display: 'inline-flex'}}><MaterialIcon icon='face' />： {this.props.detail.adult}</span>
+            <span style={{display: 'inline-flex'}}><MaterialIcon icon='child_care'/>： {this.props.detail.child}</span>
+          </div>
         </div>
         </CardPrimaryContent>
         <CardActions>

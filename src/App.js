@@ -13,6 +13,7 @@ import API from './API'
 import L from 'leaflet'
 
 const coordinates = require("./data/coordinates.json");
+const notes = require("./data/notes.json");
 
 export default class App extends React.Component {
   constructor() {
@@ -99,7 +100,9 @@ export default class App extends React.Component {
         position: it.latLng,
         adult: this.maskRawData[it.id]["成人口罩剩餘數"],
         child: this.maskRawData[it.id]["兒童口罩剩餘數"],
-        timestamp: this.maskRawData[it.id]["來源資料時間"]
+        timestamp: this.maskRawData[it.id]["來源資料時間"],
+        note: notes[it.id].note,
+        periods: notes[it.id].periods
       }
     });
     
