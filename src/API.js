@@ -1,6 +1,6 @@
 class API {
     static async featchMaskData() {
-        const content = await fetch("https://raw.githubusercontent.com/WeiTang114/pharmacies/master/maskdata_latest.csv").then(it => it.text()).then(it => csv2Json(it));
+        const content = await fetch("https://raw.githubusercontent.com/lycheetw/mask_raw_data/master/maskdata_latest.csv").then(it => it.text()).then(it => csv2Json(it));
         const obj = {}
         content.forEach(it => {
             obj[it["醫事機構代碼"]] = it
