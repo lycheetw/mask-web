@@ -12,7 +12,7 @@ import Marker from './Marker'
 import API from './API'
 import L from 'leaflet'
 
-const dataSet = require("./data/raw.json");
+const coordinates = require("./data/coordinates.json");
 
 export default class App extends React.Component {
   constructor() {
@@ -55,7 +55,7 @@ export default class App extends React.Component {
     const rightBottom = bounds.getSouthEast();
 
 
-    const data = dataSet.filter(it => {
+    const data = coordinates.filter(it => {
       //篩選可視範圍內的資料點，因為手機與桌機版型不同(資料卡清單擺放位置不同)，而分開處理。
 
       if(this.mapRef.leafletElement.getZoom() < 14) {
@@ -93,11 +93,11 @@ export default class App extends React.Component {
     .map(it => {
       return {
         id: it.id,
-        name: it.name,
-        addr: it.address,
-        phone: it.phone,
+        name: this.maskRawData[it.id]["醫事機構名稱"],
+        addr: this.maskRawData[it.id]["醫事機構地址"],
+        phone: this.maskRawData[it.id]["醫事機構電話"],
         position: it.latLng,
-        adult: this.maskRawData[it.id]["成人口罩總剩餘數"],
+        adult: this.maskRawData[it.id]["成人口罩剩餘數"],
         child: this.maskRawData[it.id]["兒童口罩剩餘數"],
         timestamp: this.maskRawData[it.id]["來源資料時間"]
       }
