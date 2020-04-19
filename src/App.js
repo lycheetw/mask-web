@@ -5,12 +5,20 @@ import '@material/react-typography/index.scss';
 import '@material/react-card/index.scss';
 import '@material/react-icon-button/index.scss';
 import '@material/react-material-icon/index.scss';
+import '@material/react-dialog/index.scss';
 
 import { Map, TileLayer } from 'react-leaflet'
 import InfoCard from './InfoCard'
 import Marker from './Marker'
 import API from './API'
 import L from 'leaflet'
+
+import Dialog, {
+  DialogTitle,
+  DialogContent,
+  DialogFooter,
+  DialogButton,
+} from '@material/react-dialog';
 
 const coordinates = require("./data/coordinates.json");
 const notes = require("./data/notes.json");
@@ -22,7 +30,8 @@ export default class App extends React.Component {
       zoom: 16,
       defaultCenter: [25.044463, 121.543273],
       maskData: [],
-      focusId: -1
+      focusId: -1,
+      dialogIsOpen: false,
     }
     this.maskRawData = {};
     
@@ -46,6 +55,16 @@ export default class App extends React.Component {
 
     if(window.screen.lockOrientation) {
       window.screen.lockOrientation("portrait");
+    }
+
+    if(localStorage !== undefined) {
+      let flag = localStorage.getItem('Notification_0419');
+      console.log(flag);
+      if(localStorage.getItem('Notification_0419') == null) {
+          this.setState({dialogIsOpen: true});
+          // localStorage.setItem('Notification_0419', "true");
+          // localStorage.removeItem("Notification_0419");
+      }
     }
   }
 
@@ -159,7 +178,9 @@ export default class App extends React.Component {
         }}
       />
     });
-
+    //https://tile-b.openstreetmap.fr/hot/{z}/{x}/{y}.png
+    //https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}@2x.png
+    //https://a.tile.openstreetmap.de/{z}/{x}/{y}.png
     return (
       <div id="root-continer">
       <Map id="map-continer" 
@@ -205,6 +226,15 @@ export default class App extends React.Component {
         {cards}
       </div>
 
+      <Dialog open={this.state.dialogIsOpen}>
+        <DialogTitle>重要通知</DialogTitle>
+        <DialogContent>
+          即日起，口罩已售完或是當日停止販售之藥局，不會顯示在地圖上面。
+        </DialogContent>
+        <DialogFooter>
+          <DialogButton action='accept' isDefault>確定</DialogButton>
+        </DialogFooter>
+      </Dialog>
       </div>
     );
   }
