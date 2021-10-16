@@ -31,7 +31,7 @@ export default class App extends React.Component {
       defaultCenter: [25.044463, 121.543273],
       maskData: [],
       focusId: -1,
-      dialogIsOpen: false,
+      dialogIsOpen: true,
     }
     this.maskRawData = {};
     
@@ -55,16 +55,6 @@ export default class App extends React.Component {
 
     if(window.screen.lockOrientation) {
       window.screen.lockOrientation("portrait");
-    }
-
-    if(localStorage !== undefined) {
-      let flag = localStorage.getItem('Notification_0419');
-      console.log(flag);
-      if(localStorage.getItem('Notification_0419') == null) {
-          this.setState({dialogIsOpen: true});
-          // localStorage.setItem('Notification_0419', "true");
-          // localStorage.removeItem("Notification_0419");
-      }
     }
   }
 
@@ -195,8 +185,8 @@ export default class App extends React.Component {
         }
         >
         <TileLayer
-          attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
+          attribution='<a href="http://maps.nlsc.gov.tw/" target="_blank">國土測繪圖資服務雲</a>'
+          url='https://wmts.nlsc.gov.tw/wmts/EMAP/default/EPSG:3857/{z}/{y}/{x}.png'
         />
         {markers}
       </Map>
@@ -229,7 +219,7 @@ export default class App extends React.Component {
       <Dialog open={this.state.dialogIsOpen}>
         <DialogTitle>重要通知</DialogTitle>
         <DialogContent>
-          即日起，口罩已售完或是當日停止販售之藥局，不會顯示在地圖上面。
+          本站已經停止更新，此網頁留存做展示使用。
         </DialogContent>
         <DialogFooter>
           <DialogButton action='accept' isDefault>確定</DialogButton>
